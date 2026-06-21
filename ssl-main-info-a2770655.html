@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.2, user-scalable=yes">
+    <title>pg模拟器 · 信息卡片介绍</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #f7f9fc;
+            color: #1e2a3a;
+            line-height: 1.7;
+            padding: 2.5rem 1.25rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .page {
+            max-width: 720px;
+            width: 100%;
+            background: white;
+            border-radius: 28px;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.02);
+            padding: 2.8rem 2rem 3.2rem;
+            transition: box-shadow 0.2s ease;
+        }
+
+        @media (max-width: 540px) {
+            body {
+                padding: 1rem 0.6rem;
+            }
+            .page {
+                padding: 2rem 1.25rem 2.4rem;
+                border-radius: 20px;
+            }
+        }
+
+        /* 主视觉 极简留白 */
+        .hero {
+            margin-bottom: 2.8rem;
+            text-align: center;
+            padding: 0 0.4rem;
+        }
+
+        .hero-icon {
+            width: 56px;
+            height: 56px;
+            background: #e5edf5;
+            border-radius: 40% 60% 40% 60% / 50% 40% 60% 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.6rem;
+            font-size: 28px;
+            color: #2b4b6e;
+            box-shadow: 0 4px 8px rgba(0, 20, 40, 0.04);
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            color: #0a1c2f;
+            margin-bottom: 0.6rem;
+        }
+
+        .hero .sub {
+            font-size: 1rem;
+            color: #596f82;
+            max-width: 480px;
+            margin: 0 auto;
+            border-top: 1px solid #e8edf2;
+            padding-top: 0.8rem;
+        }
+
+        .hero .sub span {
+            background: #eef3f8;
+            padding: 0.1rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        /* 信息卡片网格 */
+        .card-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.8rem;
+            margin: 2.4rem 0 2rem;
+        }
+
+        .card {
+            background: #fafcff;
+            border-radius: 20px;
+            padding: 1.6rem 1.8rem;
+            border: 1px solid #eef2f7;
+            transition: background 0.15s, box-shadow 0.2s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+
+        .card:hover {
+            background: #ffffff;
+            box-shadow: 0 6px 18px rgba(0, 20, 40, 0.06);
+        }
+
+        .card h2 {
+            font-size: 1.35rem;
+            font-weight: 500;
+            color: #133249;
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card h2 .badge {
+            font-size: 0.8rem;
+            background: #dce6ef;
+            color: #1f405e;
+            padding: 0.1rem 0.7rem;
+            border-radius: 30px;
+            font-weight: 400;
+        }
+
+        .card p {
+            color: #2b4055;
+            margin-bottom: 0.4rem;
+        }
+
+        .card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .card .tag {
+            display: inline-block;
+            background: #e8eff7;
+            font-size: 0.85rem;
+            padding: 0.15rem 0.9rem;
+            border-radius: 30px;
+            margin-top: 0.25rem;
+            color: #1f3c57;
+        }
+
+        /* 自然链接段落 */
+        .link-paragraph {
+            background: #f5f9fe;
+            border-radius: 20px;
+            padding: 1.6rem 1.8rem;
+            margin: 2rem 0 1.8rem;
+            border-left: 4px solid #8ba9c7;
+            font-size: 1rem;
+            color: #1c3145;
+        }
+
+        .link-paragraph a {
+            color: #1a4d6e;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid #b7cbde;
+            padding-bottom: 0.1rem;
+            transition: border-color 0.15s, color 0.15s;
+        }
+
+        .link-paragraph a:hover {
+            color: #0b2f46;
+            border-bottom-color: #1a4d6e;
+        }
+
+        .link-paragraph .highlight {
+            background: #e3edf7;
+            padding: 0.05rem 0.4rem;
+            border-radius: 12px;
+        }
+
+        /* 适合人群 迷你列表 */
+        .audience {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem 0.8rem;
+            margin: 0.8rem 0 0.2rem;
+        }
+
+        .audience-item {
+            background: white;
+            border: 1px solid #dce3ec;
+            border-radius: 50px;
+            padding: 0.2rem 1rem 0.2rem 0.9rem;
+            font-size: 0.9rem;
+            color: #1f3a52;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .audience-item::before {
+            content: "·";
+            font-weight: bold;
+            color: #7b98b3;
+            margin-right: 2px;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #e2e9f1;
+            margin: 1.8rem 0 1.2rem;
+        }
+
+        .faq-mini {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .faq-q {
+            font-weight: 500;
+            color: #103752;
+            display: flex;
+            gap: 0.6rem;
+            align-items: baseline;
+        }
+
+        .faq-q::before {
+            content: "▹";
+            color: #6e8ba8;
+            font-size: 1.1rem;
+        }
+
+        .faq-a {
+            color: #38536b;
+            padding-left: 1.6rem;
+            font-size: 0.95rem;
+            margin-top: -0.1rem;
+        }
+
+        .footer-note {
+            margin-top: 2.2rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #6d859c;
+            border-top: 1px solid #eef2f7;
+            padding-top: 1.4rem;
+        }
+
+        .dot-sep {
+            margin: 0 0.3rem;
+            color: #b6c9dd;
+        }
+
+        /* 响应式微调 */
+        @media (max-width: 420px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            .card {
+                padding: 1.2rem 1.2rem;
+            }
+            .link-paragraph {
+                padding: 1.2rem 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <!-- 主视觉 -->
+    <div class="hero">
+        <div class="hero-icon">⬡</div>
+        <h1>持续关注的界面</h1>
+        <div class="sub">
+            <span>再次访问 · 收藏 · 知识型备忘</span>
+        </div>
+    </div>
+
+    <!-- 信息卡片：用途卡片 -->
+    <div class="card-grid">
+        <div class="card">
+            <h2>🧩 用途卡片 <span class="badge">场景</span></h2>
+            <p><strong>pg模拟器</strong> 是一种在浏览器内模拟特定运行环境的轻量工具，常用于快速体验、调试预览或学习验证。你可以在不同设备上重复使用同一份配置，省去本地安装的繁琐。</p>
+            <p>对于经常需要对比多种参数效果的用户，将其加入书签并定期回访，能够保持工作流的连贯性。</p>
+            <span class="tag"># 无痕体验</span>
+            <span class="tag" style="margin-left:0.5rem;"># 参数快照</span>
+        </div>
+
+        <!-- 适合人群 融入到卡片 -->
+        <div class="card">
+            <h2>👥 适合哪些人</h2>
+            <p>以下人群更容易从持续使用中获得价值：</p>
+            <div class="audience">
+                <span class="audience-item">技术评估者</span>
+                <span class="audience-item">学习爱好者</span>
+                <span class="audience-item">内容创作者</span>
+                <span class="audience-item">轻度测试员</span>
+                <span class="audience-item">收藏研究者</span>
+            </div>
+            <p style="margin-top:0.8rem;">如果你习惯把常用工具固定下来、反复回访，那么将 <strong>pg模拟器</strong> 纳入收藏夹会是一个自然的选择。</p>
+        </div>
+    </div>
+
+    <!-- 自然链接段落 (再次访问、收藏角度) -->
+    <div class="link-paragraph">
+        <p><strong>▸ 再次访问，形成习惯</strong></p>
+        <p style="margin-top:0.4rem;">
+            许多人第一次使用某种模拟环境后，往往因为忘记地址或浏览器标签页关闭而再也找不到。为了避免这种中断，建议你在收藏夹或笔记中保留指向 
+            <a href="https://ssl-main-pg.com">pg模拟器</a> 的直接入口。
+            每次有新的测试想法或需要回顾之前的效果时，无需重新搜索，直接打开即可继续工作。
+        </p>
+        <p style="margin-top:0.6rem;">
+            从持续关注的角度看，定期回到同一个页面，也能观察到功能细节的迭代与变化，形成一种稳定的参考锚点。
+        </p>
+    </div>
+
+    <!-- 补充卡片：知识型承接 -->
+    <div class="card" style="margin-bottom: 0.4rem;">
+        <h2>📋 使用提示</h2>
+        <p>• 页面加载后，建议先花一分钟熟悉默认面板布局，很多功能入口藏在二级菜单中。<br>
+           • 若需要保存当前模拟状态，可截取关键参数或使用浏览器自带的“页面另存为”功能。<br>
+           • 由于模拟环境依赖前端渲染，保持浏览器版本更新有利于获得更稳定的表现。</p>
+    </div>
+
+    <!-- FAQ 摘要 窄排版 -->
+    <hr>
+    <div class="faq-mini">
+        <div>
+            <div class="faq-q">为什么需要收藏这个页面？</div>
+            <div class="faq-a">因为模拟器类工具往往没有桌面客户端，收藏是最高效的再次访问方式。尤其当你需要比对不同版本的参数行为时，固定的入口能节省大量时间。</div>
+        </div>
+        <div>
+            <div class="faq-q">适合每天使用吗？</div>
+            <div class="faq-a">视个人需求而定。如果你经常做轻量验证或学习记录，每周访问2~3次就能形成自然的节奏。把它当作一个可随时调用的参考页即可。</div>
+        </div>
+    </div>
+
+    <!-- 底部简洁 -->
+    <div class="footer-note">
+        <span>知识型卡片页</span>
+        <span class="dot-sep">·</span>
+        <span>内容自然承接</span>
+        <span class="dot-sep">·</span>
+        <span>极简留白</span>
+    </div>
+</div>
+</body>
+</html>
